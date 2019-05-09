@@ -3,18 +3,6 @@ import { I18nProvider as LinguiProvider } from '@lingui/react';
 import { setupI18n } from '@lingui/core';
 import { I18nProvider } from '@wapps/gatsby-i18n';
 
-const convert = data =>
-  JSON.parse(data, function(key, value) {
-    if (
-      typeof value === 'string' &&
-      value.startsWith('/Function(') &&
-      value.endsWith(')/')
-    ) {
-      value = value.substring(10, value.length - 2);
-      return eval('(' + value + ')');
-    }
-    return value;
-  });
 
 const withLingui = (options = {}) => Comp => {
   class I18n extends Component {
